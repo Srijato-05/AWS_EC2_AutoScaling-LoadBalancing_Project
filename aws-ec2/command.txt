@@ -1,0 +1,27 @@
+NOTE: 
+These are commands would probably be run. 
+This is for personal reference. 
+Not all commands are running 
+
+
+mvn clean install -u
+
+mvn spring-boot:run
+
+curl http://localhost:8080/api/hello
+curl http://localhost:8080/ec2/instances
+curl http://localhost:8080/ec2/instances/<instance-id>
+curl http://localhost:8080/loadbalancer
+curl http://localhost:8080/autoscaling/groups
+curl http://localhost:8080/loadbalancer/target-groups
+curl http://localhost:8080/loadbalancer/target-groups/<target-group-id>/health
+curl http://localhost:8080/autoscaling/alarms
+
+
+aws ec2 describe-instances --query "Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress,PrivateIpAddress]"
+aws elb describe-load-balancers --query "LoadBalancerDescriptions[*].[LoadBalancerName, DNSName, VPCId]"
+aws autoscaling describe-auto-scaling-groups --query "AutoScalingGroups[*].[AutoScalingGroupName, MinSize, MaxSize, DesiredCapacity, Instances]"
+aws ec2 describe-launch-templates --query "LaunchTemplates[*].[LaunchTemplateId, LaunchTemplateName]"
+aws elbv2 describe-target-groups --query "TargetGroups[*].[TargetGroupName, TargetType, LoadBalancerArns]"
+aws autoscaling describe-policies --query "ScalingPolicies[*].[PolicyName, PolicyType, AutoScalingGroupName]"
+aws cloudwatch describe-alarms --query "MetricAlarms[*].[AlarmName, StateValue, Threshold, ComparisonOperator]"
